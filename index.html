@@ -48,22 +48,73 @@
 
     <div
       id="lock-screen"
-      class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#eaddcf] transition-opacity duration-1000 opacity-100"
+      class="fixed inset-0 z-50 flex flex-col items-center justify-center transition-opacity duration-1000 opacity-100 bg-gradient-to-r from-pink-300 via-transparent to-purple-700"
     >
       <div
-        class="text-center p-8 border-2 border-ink rounded-lg bg-parchment shadow-lg max-w-sm w-full mx-4"
+        id="lock-screen-bg1"
+        class="absolute inset-0 bg-contain bg-center bg-no-repeat transition-opacity duration-1000 opacity-100"
+      ></div>
+      <div
+        id="lock-screen-bg2"
+        class="absolute inset-0 bg-contain bg-center bg-no-repeat transition-opacity duration-1000 opacity-0"
+      ></div>
+      <div class="absolute inset-0 bg-[#eaddcf]/30"></div>
+      <div
+        class="relative text-center p-8 border border-white/80 rounded-3xl bg-white/10 shadow-xl max-w-sm w-full mx-4 text-white"
       >
-        <i class="fa-solid fa-lock text-4xl text-wax mb-4"></i>
+        <i class="fa-solid fa-lock text-4xl text-white mb-4"></i>
         <h1 class="text-2xl mb-2 font-semibold">A Year Together</h1>
         <p class="text-sm italic mb-8">
           This letter is sealed. Click to open our memories.
         </p>
         <button
-          onclick="unlockLetter()"
-          class="px-6 py-2 border border-ink hover:bg-ink hover:text-parchment transition-colors duration-300 font-medium tracking-widest uppercase text-sm"
+          onclick="openPinModal()"
+          class="px-6 py-2 border border-white/80 text-white hover:bg-white/20 transition-colors duration-300 font-medium tracking-widest uppercase text-sm"
         >
           Unlock Letter
         </button>
+      </div>
+    </div>
+
+    <div
+      id="pin-modal"
+      class="fixed inset-0 hidden flex items-center justify-center bg-black/70 p-4 z-50"
+    >
+      <div
+        class="w-full max-w-md rounded-3xl bg-slate-950/95 border border-white/20 p-8 text-white shadow-2xl"
+      >
+        <h2 class="text-2xl font-semibold mb-4">Enter PIN</h2>
+        <p class="text-sm text-slate-300 mb-6">
+          Enter the 6-digit code to unlock the letter.
+        </p>
+        <input
+          id="pin-input"
+          type="text"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          maxlength="6"
+          autocomplete="one-time-code"
+          class="w-full rounded-2xl border border-white/20 bg-white/10 p-4 text-xl font-semibold text-white outline-none placeholder:text-slate-400"
+          placeholder="Enter PIN"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+        />
+        <p id="pin-error" class="mt-3 text-sm text-rose-300 hidden">
+          Incorrect PIN. Try again.
+        </p>
+        <div class="mt-6 flex items-center justify-end gap-3">
+          <button
+            onclick="closePinModal()"
+            class="rounded-full border border-white/30 px-4 py-2 text-sm uppercase tracking-widest text-white hover:bg-white/10 transition"
+          >
+            Cancel
+          </button>
+          <button
+            onclick="submitPin()"
+            class="rounded-full bg-white text-slate-950 px-4 py-2 text-sm uppercase tracking-widest transition hover:bg-slate-100"
+          >
+            Submit
+          </button>
+        </div>
       </div>
     </div>
 
@@ -72,6 +123,12 @@
       class="opacity-0 hidden max-w-3xl mx-auto py-12 px-4 sm:px-8 relative z-10 transition-opacity duration-1000"
     >
       <div class="letter-container p-8 sm:p-16 relative">
+        <button
+          onclick="returnToLockScreen()"
+          class="absolute right-8 top-8 rounded-full border border-ink bg-parchment/90 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-ink transition hover:bg-ink hover:text-parchment"
+        >
+          Back
+        </button>
         <div class="text-center mb-16">
           <h1 class="font-handwriting text-5xl sm:text-6xl text-wax mb-4">
             Happy Anniversary
@@ -91,7 +148,7 @@
         <div class="mt-16 text-center">
           <div class="w-16 h-[1px] bg-ink mx-auto mb-6"></div>
           <p class="font-handwriting text-3xl mt-4">With all my love,</p>
-          <p class="font-handwriting text-2xl mt-2">[Your Name]</p>
+          <p class="font-handwriting text-2xl mt-2">CJay</p>
         </div>
       </div>
     </div>
@@ -210,6 +267,33 @@
 
       renderTimeline();
 
+      const unlockPin = "071525";
+
+      function openPinModal() {
+        const modal = document.getElementById("pin-modal");
+        const input = document.getElementById("pin-input");
+        const error = document.getElementById("pin-error");
+        input.value = "";
+        error.classList.add("hidden");
+        modal.classList.remove("hidden");
+        setTimeout(() => input.focus(), 100);
+      }
+
+      function closePinModal() {
+        document.getElementById("pin-modal").classList.add("hidden");
+      }
+
+      function submitPin() {
+        const input = document.getElementById("pin-input");
+        const error = document.getElementById("pin-error");
+        if (input.value === unlockPin) {
+          closePinModal();
+          unlockLetter();
+          return;
+        }
+        error.classList.remove("hidden");
+      }
+
       function unlockLetter() {
         const lockScreen = document.getElementById("lock-screen");
         const letterContent = document.getElementById("letter-content");
@@ -235,6 +319,29 @@
 
           window.scrollTo({ top: 0, behavior: "smooth" });
         }, 1000);
+      }
+
+      function returnToLockScreen() {
+        const lockScreen = document.getElementById("lock-screen");
+        const letterContent = document.getElementById("letter-content");
+        const music = document.getElementById("bg-music");
+
+        lockScreen.classList.remove(
+          "hidden",
+          "opacity-0",
+          "pointer-events-none",
+        );
+        lockScreen.classList.add("opacity-100");
+
+        letterContent.classList.add("opacity-0", "pointer-events-none");
+
+        setTimeout(() => {
+          letterContent.classList.add("hidden");
+          letterContent.classList.remove("pointer-events-none");
+
+          music.pause();
+          music.currentTime = 0;
+        }, 500);
       }
     </script>
 
@@ -270,5 +377,163 @@
         </div>
       </div>
     </div>
+
+    <script>
+      const lockBgImages = [
+        "images/1st Image Together/1000019984.jpg",
+        "images/Bataan/2025/IMG_20251014_150357_935 (1).jpg",
+        "images/Bataan/2025/IMG_20251014_150413_750 (1).jpg",
+        "images/Bataan/2025/IMG_20251014_150416_176.jpg",
+        "images/Bataan/2025/IMG_20251014_173016_525.jpg",
+        "images/Bataan/2025/IMG_20251014_173018_667.jpg",
+        "images/Bataan/2025/IMG_20251014_173238_590.jpg",
+        "images/Bataan/2025/IMG_20251014_173241_118.jpg",
+        "images/Bataan/2025/IMG_20251014_173253_731 (1).jpg",
+        "images/Bataan/2025/IMG_20251014_173258_666.jpg",
+        "images/Bataan/2025/IMG_20251014_173307_147.jpg",
+        "images/Bataan/2025/IMG_20251015_105151_904 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251015_105156_781 (1).jpg",
+        "images/Bataan/2025/IMG_20251015_110430_401 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251015_110432_268 (1).jpg",
+        "images/Bataan/2025/IMG_20251015_163731_652 (1).jpg",
+        "images/Bataan/2025/IMG_20251015_164223_167 (1).jpg",
+        "images/Bataan/2025/IMG_20251015_164225_078 (1).jpg",
+        "images/Bataan/2025/IMG_20251015_164226_606 (1).jpg",
+        "images/Bataan/2025/IMG_20251015_164306_427 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251015_164308_360 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251015_164458_863 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251015_164500_235 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251015_164536_766 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251015_164542_689 (1).jpg",
+        "images/Bataan/2025/IMG_20251015_164836_465 (1).jpg",
+        "images/Bataan/2025/IMG_20251015_164902_316 (1).jpg",
+        "images/Bataan/2025/IMG_20251015_165008_077 (1).jpg",
+        "images/Bataan/2025/IMG_20251015_165347_795.jpg",
+        "images/Bataan/2025/IMG_20251015_165558_948 (1).jpg",
+        "images/Bataan/2025/IMG_20251015_165640_604 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251015_165647_894 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251015_165654_237 (1).jpg",
+        "images/Bataan/2025/IMG_20251015_165713_247 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251015_165838_556.jpg",
+        "images/Bataan/2025/IMG_20251015_165847_381 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251015_165908_471 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251015_170043_667 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251015_170052_999 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251016_113344_407 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251016_113348_177 (1).jpg",
+        "images/Bataan/2025/IMG_20251016_172338_173.jpg",
+        "images/Bataan/2025/IMG_20251016_172452_850 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251016_172747_767 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251016_172844_150 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251016_174927_514 (1) (1).jpg",
+        "images/Bataan/2025/IMG_20251016_174931_298 (1).jpg",
+        "images/Bataan/2026/pm_1768128388305_cmp.jpg",
+        "images/Bataan/2026/pm_1768128393881_cmp.jpg",
+        "images/Bataan/2026/pm_1768128394342_cmp.jpg",
+        "images/Bataan/2026/pm_1768128397417_cmp.jpg",
+        "images/Bataan/2026/pm_1768128397803_cmp.jpg",
+        "images/Bataan/2026/pm_1768128399534_cmp.jpg",
+        "images/Bataan/2026/pm_1768128399819_cmp.jpg",
+        "images/Bataan/2026/pm_1768128401211_cmp.jpg",
+        "images/Manaoag/2025/pm_1768128416038_cmp.jpg",
+        "images/Manaoag/2025/pm_1768128416437_cmp.jpg",
+        "images/Manaoag/2025/pm_1768128417162_cmp.jpg",
+        "images/Manaoag/2025/pm_1768128419042_cmp.jpg",
+        "images/Manaoag/2025/pm_1768128419866_cmp.jpg",
+        "images/Manaoag/2025/pm_1768128420308_cmp.jpg",
+        "images/Manaoag/2025/pm_1768128420724_cmp.jpg",
+        "images/Manaoag/2025/pm_1768128422150_cmp.jpg",
+        "images/Manaoag/2025/pm_1768128423235_cmp.jpg",
+        "images/Manaoag/2025/pm_1768128424188_cmp.jpg",
+        "images/Manaoag/2025/pm_1768128424661_cmp.jpg",
+        "images/Manaoag/2025/pm_1768128425683_cmp.jpg",
+        "images/Manaoag/2025/pm_1768128427916_cmp.jpg",
+        "images/Manaoag/2025/pm_1768128428355_cmp.jpg",
+        "images/Manaoag/2025/pm_1768128428874_cmp.jpg",
+        "images/Manaoag/2025/pm_1768128429261_cmp.jpg",
+        "images/Manaoag/2025/pm_1768128429605_cmp.jpg",
+        "images/Manaoag/2025/images/pm_1768128416813_cmp.jpg",
+        "images/Manaoag/2025/images/pm_1768128422612_cmp.jpg",
+        "images/Manaoag/2025/images/pm_1768128423771_cmp.jpg",
+        "images/Manaoag/2025/images/pm_1768128430120_cmp.jpg",
+        "images/Manaoag/2025/images/pm_1768128430484_cmp.jpg",
+        "images/Manaoag/2025/images/pm_1768128430947_cmp.jpg",
+        "images/Manaoag/2025/images/pm_1768128432221_cmp.jpg",
+        "images/Manaoag/2025/images/pm_1768128432722_cmp.jpg",
+        "images/Tarlac/2025/IMG_20250811_171107_439.jpg",
+        "images/Tarlac/2025/IMG_20250811_171110_307.jpg",
+        "images/Tarlac/2025/IMG_20250811_171117_133.jpg",
+        "images/Tarlac/2025/IMG_20251109_200530_356.jpg",
+        "images/Tarlac/2025/IMG_20251109_200541_882.jpg",
+        "images/Tarlac/2025/pm_1768128433036_cmp.jpg",
+        "images/Tarlac/2025/pm_1768128433518_cmp.jpg",
+        "images/Tarlac/2025/pm_1768128437994_cmp.jpg",
+        "images/Tarlac/2025/pm_1768128438253_cmp.jpg",
+        "images/Tarlac/2025/pm_1768128438579_cmp.jpg",
+        "images/Tarlac/2025/pm_1768128438758_cmp.jpg",
+        "images/Tarlac/2025/pm_1768128438942_cmp.jpg",
+        "images/Tarlac/2026/images/IMG_20260402_140036_973.jpg",
+        "images/Tarlac/2026/images/IMG_20260402_140039_414.jpg",
+        "images/Tarlac/2026/images/IMG_20260405_092322_744.jpg",
+        "images/Tarlac/2026/images/IMG_20260405_092350_551.jpg",
+        "images/Tarlac/2026/images/IMG_20260405_092352_303.jpg",
+        "images/Tarlac/2026/images/IMG_20260405_092453_096.jpg",
+        "images/Tarlac/2026/images/IMG_20260405_092454_907.jpg",
+        "images/Tarlac/2026/images/IMG_20260405_133557_388.jpg",
+        "images/Tarlac/2026/images/IMG_20260405_133631_155.jpg",
+        "images/Tarlac/2026/images/IMG_20260405_133633_358.jpg",
+        "images/Tarlac/2026/images/IMG_20260405_133634_079.jpg",
+        "images/Tarlac/2026/images/IMG_20260405_133649_414.jpg",
+        "images/Tarlac/2026/images/IMG_20260405_133650_452.jpg",
+        "images/Tarlac/2026/images/IMG_20260405_133705_140.jpg",
+        "images/Tarlac/2026/images/IMG_20260405_133705_978.jpg",
+        "images/Tarlac/2026/images/IMG_20260405_133706_516.jpg",
+        "images/Tarlac/2026/images/IMG_20260405_133713_504.jpg",
+        "images/Tarlac/2026/images/IMG_20260405_133713_879.jpg",
+      ];
+
+      let currentLockBg = 0;
+      const bg1 = document.getElementById("lock-screen-bg1");
+      const bg2 = document.getElementById("lock-screen-bg2");
+
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+
+      function setLockBackground(index) {
+        const nextImage = lockBgImages[index];
+        if (!nextImage) return;
+        bg2.style.backgroundImage = `url('${nextImage}')`;
+        bg2.classList.add("opacity-100");
+        bg1.classList.remove("opacity-100");
+
+        setTimeout(() => {
+          bg1.style.backgroundImage = `url('${nextImage}')`;
+          bg1.classList.add("opacity-100");
+          bg2.classList.remove("opacity-100");
+        }, 1000);
+      }
+
+      function rotateLockBackground() {
+        currentLockBg = (currentLockBg + 1) % lockBgImages.length;
+        setLockBackground(currentLockBg);
+      }
+
+      // Preload and start rotation
+      function initLockBackgrounds() {
+        shuffleArray(lockBgImages);
+        lockBgImages.forEach((src) => {
+          const img = new Image();
+          img.src = src;
+        });
+        setLockBackground(0);
+        setInterval(rotateLockBackground, 5000);
+      }
+
+      document.addEventListener("DOMContentLoaded", initLockBackgrounds);
+    </script>
   </body>
 </html>
