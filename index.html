@@ -6,7 +6,7 @@
     <title>Happy Anniversary</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Playfair+Display:ital,wght@0,700;1,400;1,700&display=swap"
       rel="stylesheet"
     />
     <link
@@ -28,359 +28,398 @@
             fontFamily: {
               serif: ["Lora", "serif"],
               handwriting: ["Caveat", "cursive"],
+              display: ["Playfair Display", "serif"],
             },
           },
         },
       };
     </script>
     <style>
-      :root {
-        color-scheme: light;
-      }
+      :root { color-scheme: light; }
 
       body {
         background-color: #eaddcf;
         background-image:
-          radial-gradient(
-            circle at 15% 20%,
-            rgba(255, 255, 255, 0.25),
-            transparent 45%
-          ),
-          radial-gradient(
-            circle at 85% 80%,
-            rgba(139, 0, 0, 0.05),
-            transparent 50%
-          );
+          radial-gradient(circle at 15% 20%, rgba(255,255,255,0.25), transparent 45%),
+          radial-gradient(circle at 85% 80%, rgba(139,0,0,0.05), transparent 50%);
       }
 
+      /* ===== LETTER PAPER ===== */
       .letter-container {
         background-color: #fdf6e7;
-        background-image: repeating-linear-gradient(
-          0deg,
-          rgba(62, 42, 30, 0.025) 0px,
-          rgba(62, 42, 30, 0.025) 1px,
-          transparent 1px,
-          transparent 32px
-        );
+        background-image:
+          repeating-linear-gradient(0deg,
+            rgba(62,42,30,0.022) 0px,
+            rgba(62,42,30,0.022) 1px,
+            transparent 1px,
+            transparent 32px);
         box-shadow:
-          0 10px 40px rgba(62, 42, 30, 0.18),
-          0 1px 0 rgba(255, 255, 255, 0.4) inset;
-      }
-
-      /* ===== LOCK SCREEN DECORATIVE LAYER ===== */
-
-      /* Animated floating particles */
-      @keyframes floatUp {
-        0% {
-          transform: translateY(0) translateX(0) scale(1);
-          opacity: 0;
-        }
-        10% {
-          opacity: 1;
-        }
-        90% {
-          opacity: 0.6;
-        }
-        100% {
-          transform: translateY(-100vh) translateX(var(--drift)) scale(0.5);
-          opacity: 0;
-        }
-      }
-      @keyframes twinkle {
-        0%,
-        100% {
-          opacity: 0.2;
-          transform: scale(1);
-        }
-        50% {
-          opacity: 1;
-          transform: scale(1.4);
-        }
-      }
-      @keyframes shimmerText {
-        0% {
-          background-position: -200% center;
-        }
-        100% {
-          background-position: 200% center;
-        }
-      }
-      @keyframes pulseRing {
-        0% {
-          transform: scale(0.95);
-          box-shadow: 0 0 0 0 rgba(201, 163, 95, 0.5);
-        }
-        70% {
-          transform: scale(1);
-          box-shadow: 0 0 0 18px rgba(201, 163, 95, 0);
-        }
-        100% {
-          transform: scale(0.95);
-          box-shadow: 0 0 0 0 rgba(201, 163, 95, 0);
-        }
-      }
-      @keyframes rotateSlow {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-      @keyframes rotateCCW {
-        to {
-          transform: rotate(-360deg);
-        }
-      }
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      @keyframes heartbeat {
-        0%,
-        100% {
-          transform: scale(1);
-        }
-        14% {
-          transform: scale(1.15);
-        }
-        28% {
-          transform: scale(1);
-        }
-        42% {
-          transform: scale(1.08);
-        }
-        70% {
-          transform: scale(1);
-        }
-      }
-
-      .particle {
-        position: absolute;
-        border-radius: 50%;
-        pointer-events: none;
-        animation: floatUp linear infinite;
-      }
-      .star-particle {
-        position: absolute;
-        color: rgba(201, 163, 95, 0.7);
-        pointer-events: none;
-        animation: twinkle ease-in-out infinite;
-        font-size: 10px;
-      }
-
-      .shimmer-text {
-        background: linear-gradient(
-          90deg,
-          rgba(255, 255, 255, 0.7) 0%,
-          rgba(255, 255, 255, 1) 30%,
-          rgba(201, 163, 95, 1) 50%,
-          rgba(255, 255, 255, 1) 70%,
-          rgba(255, 255, 255, 0.7) 100%
-        );
-        background-size: 200% auto;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: shimmerText 4s linear infinite;
-      }
-
-      .lock-bg-layer {
-        background-position: center;
-      }
-
-      /* Corner ornament rings */
-      .corner-ring {
-        position: absolute;
-        border-radius: 50%;
-        border: 1px solid rgba(201, 163, 95, 0.25);
-        pointer-events: none;
-      }
-
-      /* Rotating decorative halos around seal */
-      .halo-outer {
-        position: absolute;
-        inset: -24px;
-        border-radius: 50%;
-        border: 1px dashed rgba(201, 163, 95, 0.35);
-        animation: rotateSlow 20s linear infinite;
-      }
-      .halo-inner {
-        position: absolute;
-        inset: -12px;
-        border-radius: 50%;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        animation: rotateCCW 14s linear infinite;
-      }
-      /* Dots on the outer halo */
-      .halo-dot {
-        position: absolute;
-        width: 5px;
-        height: 5px;
-        background: rgba(201, 163, 95, 0.7);
-        border-radius: 50%;
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%) translateX(-2.5px);
-      }
-
-      /* Wax seal */
-      .seal {
+          0 10px 40px rgba(62,42,30,0.18),
+          0 1px 0 rgba(255,255,255,0.4) inset;
         position: relative;
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        background: radial-gradient(circle at 35% 30%, #a30f0f, #6b0000 70%);
-        box-shadow:
-          0 8px 24px rgba(0, 0, 0, 0.45),
-          inset 0 2px 6px rgba(255, 255, 255, 0.25),
-          inset 0 -6px 14px rgba(0, 0, 0, 0.35);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        border: none;
-        padding: 0;
-        animation:
-          pulseRing 2.5s ease-out infinite,
-          heartbeat 2s ease-in-out infinite;
-      }
-      .seal::after {
-        content: "";
-        position: absolute;
-        inset: -5px;
-        border-radius: 50%;
-        background:
-          radial-gradient(circle at 6% 38%, #6b0000 0 9px, transparent 10px),
-          radial-gradient(circle at 18% 12%, #6b0000 0 7px, transparent 8px),
-          radial-gradient(circle at 94% 28%, #6b0000 0 8px, transparent 9px),
-          radial-gradient(circle at 88% 62%, #6b0000 0 10px, transparent 11px),
-          radial-gradient(circle at 62% 95%, #6b0000 0 9px, transparent 10px),
-          radial-gradient(circle at 28% 93%, #6b0000 0 7px, transparent 8px),
-          radial-gradient(circle at 40% 3%, #6b0000 0 6px, transparent 7px);
-        z-index: -1;
-        opacity: 0.85;
-      }
-      .seal:hover {
-        transform: scale(1.06);
-      }
-      .seal-glyph {
-        font-size: 2.2rem;
-        color: rgba(253, 246, 231, 0.92);
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-        user-select: none;
-      }
-      .seal.is-cracking {
-        animation: seal-crack 0.7s ease forwards;
-      }
-      @keyframes seal-crack {
-        0% {
-          transform: scale(1) rotate(0deg);
-          opacity: 1;
-        }
-        35% {
-          transform: scale(1.12) rotate(-4deg);
-        }
-        100% {
-          transform: scale(1.5) rotate(8deg);
-          opacity: 0;
-        }
       }
 
-      /* Decorative divider lines */
-      .ornament-line {
+      /* Corner SVG flourish */
+      .corner-flourish {
+        position: absolute;
+        width: 90px;
+        height: 90px;
+        pointer-events: none;
+        opacity: 0.45;
+      }
+      .corner-flourish.tl { top: 10px; left: 10px; }
+      .corner-flourish.tr { top: 10px; right: 10px; transform: scaleX(-1); }
+      .corner-flourish.bl { bottom: 10px; left: 10px; transform: scaleY(-1); }
+      .corner-flourish.br { bottom: 10px; right: 10px; transform: scale(-1); }
+
+      /* Marginal border rules */
+      .letter-inner {
+        border: 1px solid rgba(201,163,95,0.35);
+        border-radius: 2px;
+        padding: 2px;
+      }
+      .letter-inner-2 {
+        border: 1px solid rgba(62,42,30,0.12);
+        border-radius: 1px;
+      }
+
+      /* Drop cap */
+      .drop-cap::first-letter {
+        font-family: 'Playfair Display', serif;
+        font-size: 4.8em;
+        font-weight: 700;
+        font-style: italic;
+        line-height: 0.75;
+        float: left;
+        margin-right: 6px;
+        margin-top: 4px;
+        color: #8b0000;
+        text-shadow: 1px 1px 0 rgba(201,163,95,0.4);
+      }
+
+      /* Ornamental dividers */
+      .ornament-hr {
         display: flex;
         align-items: center;
         gap: 10px;
-        opacity: 0.6;
+        color: rgba(201,163,95,0.7);
+        margin: 0;
       }
-      .ornament-line::before,
-      .ornament-line::after {
+      .ornament-hr::before,
+      .ornament-hr::after {
         content: "";
         flex: 1;
         height: 1px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(201, 163, 95, 0.8),
-          transparent
-        );
+        background: linear-gradient(90deg, transparent, rgba(201,163,95,0.6), transparent);
       }
 
-      /* Bottom date badge */
-      .date-badge {
-        background: linear-gradient(
-          135deg,
-          rgba(107, 0, 0, 0.6),
-          rgba(139, 0, 0, 0.4)
-        );
-        border: 1px solid rgba(201, 163, 95, 0.35);
-        backdrop-filter: blur(4px);
+      /* Section header flourish band */
+      .section-band {
+        position: relative;
+        text-align: center;
+        margin-bottom: 2.5rem;
+      }
+      .section-band::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -10px;
+        width: 60px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #c9a35f, transparent);
+        border-radius: 2px;
       }
 
-      /* Timeline */
+      /* Pull quote */
+      .pull-quote {
+        border-left: 3px solid rgba(139,0,0,0.5);
+        border-right: 3px solid rgba(139,0,0,0.5);
+        background: linear-gradient(135deg,
+          rgba(201,163,95,0.06) 0%,
+          rgba(253,246,231,0) 60%);
+        position: relative;
+      }
+      .pull-quote::before {
+        content: "\201C";
+        font-family: 'Playfair Display', serif;
+        font-size: 5rem;
+        line-height: 1;
+        color: rgba(139,0,0,0.15);
+        position: absolute;
+        top: -12px;
+        left: 12px;
+      }
+      .pull-quote::after {
+        content: "\201D";
+        font-family: 'Playfair Display', serif;
+        font-size: 5rem;
+        line-height: 1;
+        color: rgba(139,0,0,0.15);
+        position: absolute;
+        bottom: -36px;
+        right: 12px;
+      }
+
+      /* ===== TIMELINE ===== */
       .timeline-card {
         opacity: 0;
         transform: translateY(16px);
-        transition:
-          opacity 0.6s ease,
-          transform 0.6s ease;
+        transition: opacity 0.6s ease, transform 0.6s ease;
       }
       .timeline-card.is-visible {
         opacity: 1;
         transform: translateY(0);
       }
+      /* Month pill on card */
+      .month-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: rgba(139,0,0,0.08);
+        border: 1px solid rgba(139,0,0,0.2);
+        border-radius: 20px;
+        padding: 2px 10px;
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #8b0000;
+        font-weight: 600;
+      }
+      .month-pill.final {
+        background: linear-gradient(135deg, rgba(139,0,0,0.18), rgba(201,163,95,0.18));
+        border-color: rgba(201,163,95,0.5);
+        color: #6b0000;
+      }
+      /* Timeline card body */
+      .tl-card-body {
+        background: #fffdf7;
+        border: 1px solid rgba(62,42,30,0.14);
+        border-left: 3px solid rgba(139,0,0,0.3);
+        border-radius: 4px;
+        transition: box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+      .tl-card-body:hover {
+        box-shadow: 0 4px 18px rgba(62,42,30,0.1);
+        border-left-color: #8b0000;
+      }
+      .tl-card-body.final-card {
+        background: linear-gradient(135deg, #fdf8f0, #fbeecb 90%);
+        border: 1px solid rgba(201,163,95,0.5);
+        border-left: 3px solid #c9a35f;
+        box-shadow: 0 2px 14px rgba(201,163,95,0.2);
+      }
+      .tl-card-body.final-card:hover {
+        box-shadow: 0 6px 24px rgba(201,163,95,0.35);
+      }
 
-      @media (prefers-reduced-motion: reduce) {
-        * {
-          animation-duration: 0.001ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.001ms !important;
-        }
+      /* Marker */
+      .tl-marker {
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #8b0000;
+        border: 2px solid #fdf6e7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fdf6e7;
+        font-size: 0.78rem;
+        font-weight: 700;
+        box-shadow: 0 2px 8px rgba(139,0,0,0.35);
+        z-index: 20;
+        position: relative;
+        font-family: 'Lora', serif;
+      }
+      .tl-marker.final {
+        width: 42px;
+        height: 42px;
+        background: radial-gradient(circle at 35% 30%, #a30f0f, #6b0000);
+        box-shadow: 0 3px 12px rgba(139,0,0,0.5), 0 0 0 4px rgba(201,163,95,0.3);
+      }
+
+      /* Signature line */
+      .sig-line {
+        width: 140px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(62,42,30,0.4), transparent);
+        margin: 0 auto 6px;
+      }
+
+      /* Wax ribbon at top of letter */
+      .wax-ribbon {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #a30f0f, #6b0000);
+        color: rgba(253,246,231,0.9);
+        font-size: 0.65rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        padding: 5px 28px;
+        border-radius: 0 0 8px 8px;
+        box-shadow: 0 3px 10px rgba(107,0,0,0.35);
+      }
+
+      /* ===== LOCK SCREEN ===== */
+      @keyframes floatUp {
+        0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+        10%  { opacity: 1; }
+        90%  { opacity: 0.6; }
+        100% { transform: translateY(-100vh) translateX(var(--drift)) scale(0.5); opacity: 0; }
+      }
+      @keyframes twinkle {
+        0%,100% { opacity: 0.2; transform: scale(1); }
+        50%     { opacity: 1;   transform: scale(1.4); }
+      }
+      @keyframes shimmerText {
+        0%   { background-position: -200% center; }
+        100% { background-position:  200% center; }
+      }
+      @keyframes pulseRing {
+        0%  { transform:scale(0.95); box-shadow:0 0 0 0 rgba(201,163,95,0.5); }
+        70% { transform:scale(1);    box-shadow:0 0 0 18px rgba(201,163,95,0); }
+        100%{ transform:scale(0.95); box-shadow:0 0 0 0 rgba(201,163,95,0); }
+      }
+      @keyframes rotateSlow { to { transform:rotate(360deg); } }
+      @keyframes rotateCCW  { to { transform:rotate(-360deg); } }
+      @keyframes fadeInUp {
+        from { opacity:0; transform:translateY(20px); }
+        to   { opacity:1; transform:translateY(0); }
+      }
+      @keyframes heartbeat {
+        0%,100%{ transform:scale(1); }
+        14%    { transform:scale(1.15); }
+        28%    { transform:scale(1); }
+        42%    { transform:scale(1.08); }
+        70%    { transform:scale(1); }
+      }
+
+      .particle { position:absolute; border-radius:50%; pointer-events:none; animation:floatUp linear infinite; }
+      .star-particle { position:absolute; color:rgba(201,163,95,0.7); pointer-events:none; animation:twinkle ease-in-out infinite; font-size:10px; }
+      .shimmer-text {
+        background: linear-gradient(90deg,
+          rgba(255,255,255,0.7) 0%,
+          rgba(255,255,255,1) 30%,
+          rgba(201,163,95,1) 50%,
+          rgba(255,255,255,1) 70%,
+          rgba(255,255,255,0.7) 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmerText 4s linear infinite;
+      }
+      .lock-bg-layer { background-position:center; }
+      .corner-ring { position:absolute; border-radius:50%; border:1px solid rgba(201,163,95,0.25); pointer-events:none; }
+      .halo-outer { position:absolute; inset:-24px; border-radius:50%; border:1px dashed rgba(201,163,95,0.35); animation:rotateSlow 20s linear infinite; }
+      .halo-inner { position:absolute; inset:-12px; border-radius:50%; border:1px solid rgba(255,255,255,0.15); animation:rotateCCW 14s linear infinite; }
+      .halo-dot { position:absolute; width:5px; height:5px; background:rgba(201,163,95,0.7); border-radius:50%; top:50%; left:0; transform:translateY(-50%) translateX(-2.5px); }
+      .seal { position:relative; width:120px; height:120px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #a30f0f, #6b0000 70%); box-shadow:0 8px 24px rgba(0,0,0,0.45),inset 0 2px 6px rgba(255,255,255,0.25),inset 0 -6px 14px rgba(0,0,0,0.35); display:flex; align-items:center; justify-content:center; cursor:pointer; border:none; padding:0; animation:pulseRing 2.5s ease-out infinite, heartbeat 2s ease-in-out infinite; }
+      .seal::after { content:""; position:absolute; inset:-5px; border-radius:50%; background:radial-gradient(circle at 6% 38%,#6b0000 0 9px,transparent 10px),radial-gradient(circle at 18% 12%,#6b0000 0 7px,transparent 8px),radial-gradient(circle at 94% 28%,#6b0000 0 8px,transparent 9px),radial-gradient(circle at 88% 62%,#6b0000 0 10px,transparent 11px),radial-gradient(circle at 62% 95%,#6b0000 0 9px,transparent 10px),radial-gradient(circle at 28% 93%,#6b0000 0 7px,transparent 8px),radial-gradient(circle at 40% 3%,#6b0000 0 6px,transparent 7px); z-index:-1; opacity:0.85; }
+      .seal:hover { transform:scale(1.06); }
+      .seal-glyph { font-size:2.2rem; color:rgba(253,246,231,0.92); text-shadow:0 1px 2px rgba(0,0,0,0.4); user-select:none; }
+      .seal.is-cracking { animation:seal-crack 0.7s ease forwards; }
+      @keyframes seal-crack {
+        0%   { transform:scale(1) rotate(0deg); opacity:1; }
+        35%  { transform:scale(1.12) rotate(-4deg); }
+        100% { transform:scale(1.5) rotate(8deg); opacity:0; }
+      }
+      .ornament-line { display:flex; align-items:center; gap:10px; opacity:0.6; }
+      .ornament-line::before,.ornament-line::after { content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(201,163,95,0.8),transparent); }
+
+      /* ===== VERTICAL PHOTO STRIPS ===== */
+      .photo-strip-wrap {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        width: 130px;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 5;
+        opacity: 0;
+        transition: opacity 1s ease;
+        padding: 0 10px;
+      }
+      .photo-strip-wrap.left  { left: 0; }
+      .photo-strip-wrap.right { right: 0; }
+      .photo-strip-wrap.visible { opacity: 1; }
+
+      .photo-strip {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        will-change: transform;
+        padding-top: 10px;
+      }
+
+      /* Polaroid card wrapping each image */
+      .strip-polaroid {
+        width: 110px;
+        background: #fff;
+        padding: 6px 6px 28px 6px;
+        box-shadow:
+          0 3px 12px rgba(62,42,30,0.18),
+          0 1px 3px rgba(62,42,30,0.10);
+        border: 1px solid rgba(62,42,30,0.08);
+        flex-shrink: 0;
+        position: relative;
+      }
+      .strip-polaroid img {
+        width: 98px;
+        height: 130px;
+        object-fit: cover;
+        display: block;
+        background: #eaddcf;
+      }
+      .strip-polaroid-caption {
+        position: absolute;
+        bottom: 4px;
+        left: 0; right: 0;
+        text-align: center;
+        font-family: 'Caveat', cursive;
+        font-size: 0.75rem;
+        color: rgba(62,42,30,0.5);
+        line-height: 1;
+        padding: 0 4px;
+      }
+
+      /* Fade edges top and bottom */
+      .photo-strip-wrap::before,
+      .photo-strip-wrap::after {
+        content: "";
+        position: absolute;
+        left: 0; right: 0;
+        height: 140px;
+        z-index: 2;
+        pointer-events: none;
+      }
+      .photo-strip-wrap::before {
+        top: 0;
+        background: linear-gradient(to bottom, #eaddcf 0%, transparent 100%);
+      }
+      .photo-strip-wrap::after {
+        bottom: 0;
+        background: linear-gradient(to top, #eaddcf 0%, transparent 100%);
+      }
+
+      @media (max-width: 1024px) {
+        .photo-strip-wrap { display: none; }
       }
 
       /* ===== PIN MODAL ===== */
-      #pin-modal-inner {
-        background: linear-gradient(
-          135deg,
-          #3b1460 0%,
-          #7a1f6e 50%,
-          #c2418f 100%
-        );
-        border: 1px solid rgba(255, 255, 255, 0.2);
-      }
-      #pin-input {
-        background: rgba(255, 255, 255, 0.12);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        color: #fff;
-      }
-      #pin-input::placeholder {
-        color: rgba(255, 255, 255, 0.45);
-      }
-      #pin-input:focus {
-        outline: 2px solid rgba(232, 138, 168, 0.8);
-        outline-offset: 0;
-      }
-      .pin-btn-cancel {
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        color: #fff;
-        background: transparent;
-        transition: background 0.2s;
-      }
-      .pin-btn-cancel:hover {
-        background: rgba(255, 255, 255, 0.12);
-      }
-      .pin-btn-submit {
-        background: linear-gradient(135deg, #e88aa8, #c2418f);
-        color: #fff;
-        border: none;
-        transition: opacity 0.2s;
-      }
-      .pin-btn-submit:hover {
-        opacity: 0.88;
+      #pin-modal-inner { background:linear-gradient(135deg,#3b1460 0%,#7a1f6e 50%,#c2418f 100%); border:1px solid rgba(255,255,255,0.2); }
+      #pin-input { background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.3); color:#fff; }
+      #pin-input::placeholder { color:rgba(255,255,255,0.45); }
+      #pin-input:focus { outline:2px solid rgba(232,138,168,0.8); outline-offset:0; }
+      .pin-btn-cancel { border:1px solid rgba(255,255,255,0.4); color:#fff; background:transparent; transition:background 0.2s; }
+      .pin-btn-cancel:hover { background:rgba(255,255,255,0.12); }
+      .pin-btn-submit { background:linear-gradient(135deg,#e88aa8,#c2418f); color:#fff; border:none; transition:opacity 0.2s; }
+      .pin-btn-submit:hover { opacity:0.88; }
+
+      @media (prefers-reduced-motion: reduce) {
+        * { animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
       }
     </style>
   </head>
@@ -388,342 +427,251 @@
     <audio id="bg-music" src="your-music-file.mp3" loop preload="none"></audio>
 
     <!-- ============ LOCK SCREEN ============ -->
-    <div
-      id="lock-screen"
-      class="fixed inset-0 z-50 flex flex-col items-center justify-center transition-opacity duration-1000 opacity-100"
-    >
-      <!-- Photo bg layers -->
-      <div
-        id="lock-screen-bg1"
-        class="lock-bg-layer absolute inset-0 transition-opacity duration-1000 opacity-100"
-      ></div>
-      <div
-        id="lock-screen-bg2"
-        class="lock-bg-layer absolute inset-0 transition-opacity duration-1000 opacity-0"
-      ></div>
-
-      <!-- Dark gradient overlay -->
-      <div
-        class="absolute inset-0"
-        style="
-          background: linear-gradient(
-            160deg,
-            rgba(59, 20, 96, 0.72) 0%,
-            rgba(30, 10, 50, 0.55) 40%,
-            rgba(194, 65, 143, 0.45) 100%
-          );
-        "
-      ></div>
-      <div
-        class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"
-      ></div>
-
-      <!-- Floating particles container -->
-      <div
-        id="particles-container"
-        class="absolute inset-0 overflow-hidden pointer-events-none"
-      ></div>
-
-      <!-- Star particles container -->
-      <div
-        id="stars-container"
-        class="absolute inset-0 overflow-hidden pointer-events-none"
-      ></div>
-
-      <!-- Corner decorative rings (top-left) -->
-      <div
-        class="absolute top-0 left-0 w-64 h-64 pointer-events-none"
-        style="transform: translate(-40%, -40%)"
-      >
-        <div
-          class="corner-ring absolute inset-0"
-          style="animation: rotateSlow 30s linear infinite"
-        ></div>
-        <div
-          class="corner-ring absolute"
-          style="inset: 16px; animation: rotateCCW 22s linear infinite"
-        ></div>
-        <div
-          class="corner-ring absolute"
-          style="inset: 32px; animation: rotateSlow 18s linear infinite"
-        ></div>
+    <div id="lock-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center transition-opacity duration-1000 opacity-100">
+      <div id="lock-screen-bg1" class="lock-bg-layer absolute inset-0 transition-opacity duration-1000 opacity-100"></div>
+      <div id="lock-screen-bg2" class="lock-bg-layer absolute inset-0 transition-opacity duration-1000 opacity-0"></div>
+      <div class="absolute inset-0" style="background:linear-gradient(160deg,rgba(59,20,96,0.72) 0%,rgba(30,10,50,0.55) 40%,rgba(194,65,143,0.45) 100%);"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
+      <div id="particles-container" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
+      <div id="stars-container" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
+      <div class="absolute top-0 left-0 w-64 h-64 pointer-events-none" style="transform:translate(-40%,-40%)">
+        <div class="corner-ring absolute inset-0" style="animation:rotateSlow 30s linear infinite"></div>
+        <div class="corner-ring absolute" style="inset:16px;animation:rotateCCW 22s linear infinite"></div>
+        <div class="corner-ring absolute" style="inset:32px;animation:rotateSlow 18s linear infinite"></div>
       </div>
-      <!-- Corner rings top-right -->
-      <div
-        class="absolute top-0 right-0 w-48 h-48 pointer-events-none"
-        style="transform: translate(40%, -40%)"
-      >
-        <div
-          class="corner-ring absolute inset-0"
-          style="animation: rotateCCW 25s linear infinite"
-        ></div>
-        <div
-          class="corner-ring absolute"
-          style="inset: 14px; animation: rotateSlow 16s linear infinite"
-        ></div>
+      <div class="absolute top-0 right-0 w-48 h-48 pointer-events-none" style="transform:translate(40%,-40%)">
+        <div class="corner-ring absolute inset-0" style="animation:rotateCCW 25s linear infinite"></div>
+        <div class="corner-ring absolute" style="inset:14px;animation:rotateSlow 16s linear infinite"></div>
       </div>
-      <!-- Corner rings bottom-left -->
-      <div
-        class="absolute bottom-0 left-0 w-48 h-48 pointer-events-none"
-        style="transform: translate(-40%, 40%)"
-      >
-        <div
-          class="corner-ring absolute inset-0"
-          style="animation: rotateSlow 28s linear infinite"
-        ></div>
-        <div
-          class="corner-ring absolute"
-          style="inset: 14px; animation: rotateCCW 20s linear infinite"
-        ></div>
+      <div class="absolute bottom-0 left-0 w-48 h-48 pointer-events-none" style="transform:translate(-40%,40%)">
+        <div class="corner-ring absolute inset-0" style="animation:rotateSlow 28s linear infinite"></div>
+        <div class="corner-ring absolute" style="inset:14px;animation:rotateCCW 20s linear infinite"></div>
       </div>
-      <!-- Corner rings bottom-right -->
-      <div
-        class="absolute bottom-0 right-0 w-64 h-64 pointer-events-none"
-        style="transform: translate(40%, 40%)"
-      >
-        <div
-          class="corner-ring absolute inset-0"
-          style="animation: rotateCCW 32s linear infinite"
-        ></div>
-        <div
-          class="corner-ring absolute"
-          style="inset: 16px; animation: rotateSlow 24s linear infinite"
-        ></div>
-        <div
-          class="corner-ring absolute"
-          style="inset: 32px; animation: rotateCCW 17s linear infinite"
-        ></div>
+      <div class="absolute bottom-0 right-0 w-64 h-64 pointer-events-none" style="transform:translate(40%,40%)">
+        <div class="corner-ring absolute inset-0" style="animation:rotateCCW 32s linear infinite"></div>
+        <div class="corner-ring absolute" style="inset:16px;animation:rotateSlow 24s linear infinite"></div>
+        <div class="corner-ring absolute" style="inset:32px;animation:rotateCCW 17s linear infinite"></div>
       </div>
-
-      <!-- Top ornamental text -->
-      <div
-        class="absolute top-6 sm:top-8 left-0 right-0 flex flex-col items-center pointer-events-none"
-        style="animation: fadeInUp 1.2s ease both"
-      >
-        <div class="ornament-line w-48 sm:w-64 mb-1">
-          <i class="fa-solid fa-diamond text-gold/60 text-[8px]"></i>
-        </div>
-        <p class="font-handwriting text-white/60 text-base tracking-[0.2em]">
-          CJay &amp; Ayen
-        </p>
-        <div class="ornament-line w-48 sm:w-64 mt-1">
-          <i class="fa-solid fa-diamond text-gold/60 text-[8px]"></i>
-        </div>
+      <div class="absolute top-6 sm:top-8 left-0 right-0 flex flex-col items-center pointer-events-none" style="animation:fadeInUp 1.2s ease both">
+        <div class="ornament-line w-48 sm:w-64 mb-1"><i class="fa-solid fa-diamond text-gold/60 text-[8px]"></i></div>
+        <p class="font-handwriting text-white/60 text-base tracking-[0.2em]">CJay &amp; Ayen</p>
+        <div class="ornament-line w-48 sm:w-64 mt-1"><i class="fa-solid fa-diamond text-gold/60 text-[8px]"></i></div>
       </div>
-
-      <!-- Central card -->
-      <div
-        class="relative text-center px-8 py-10 sm:px-12 sm:py-12 rounded-3xl max-w-sm w-full mx-4 text-white"
-        style="
-          background: transparent;
-          backdrop-filter: none;
-          border: 1px solid rgba(201, 163, 95, 0.35);
-          box-shadow: none;
-          animation: fadeInUp 1s ease 0.3s both;
-        "
-      >
-        <!-- Seal with halos -->
-        <div class="relative mx-auto mb-8" style="width: 120px; height: 120px">
+      <div class="relative text-center px-8 py-10 sm:px-12 sm:py-12 rounded-3xl max-w-sm w-full mx-4 text-white" style="background:transparent;backdrop-filter:none;border:1px solid rgba(201,163,95,0.35);box-shadow:none;animation:fadeInUp 1s ease 0.3s both;">
+        <div class="relative mx-auto mb-8" style="width:120px;height:120px">
           <div class="halo-outer">
             <div class="halo-dot"></div>
-            <div
-              class="halo-dot"
-              style="
-                top: 25%;
-                left: 100%;
-                transform: translateY(-50%) translateX(-2.5px) rotate(0deg);
-              "
-            ></div>
-            <div
-              class="halo-dot"
-              style="
-                top: 75%;
-                left: 100%;
-                transform: translateY(-50%) translateX(-2.5px);
-              "
-            ></div>
-            <div
-              class="halo-dot"
-              style="
-                top: 100%;
-                left: 50%;
-                transform: translateX(-50%) translateY(-2.5px);
-              "
-            ></div>
+            <div class="halo-dot" style="top:25%;left:100%;transform:translateY(-50%) translateX(-2.5px) rotate(0deg);"></div>
+            <div class="halo-dot" style="top:75%;left:100%;transform:translateY(-50%) translateX(-2.5px);"></div>
+            <div class="halo-dot" style="top:100%;left:50%;transform:translateX(-50%) translateY(-2.5px);"></div>
           </div>
           <div class="halo-inner"></div>
-          <button
-            id="seal-button"
-            class="seal"
-            type="button"
-            aria-label="Unlock the anniversary letter"
-            onclick="openPinModal()"
-          >
+          <button id="seal-button" class="seal" type="button" aria-label="Unlock the anniversary letter" onclick="openPinModal()">
             <i class="fa-solid fa-heart seal-glyph" aria-hidden="true"></i>
           </button>
         </div>
-
-        <!-- Title -->
-        <h1
-          class="shimmer-text font-handwriting text-4xl sm:text-5xl mb-1 leading-tight"
-        >
-          Happy Anniversary
-        </h1>
-        <p class="text-white/50 text-xs tracking-[0.3em] uppercase mb-6">
-          July 15, 2026
-        </p>
-
-        <!-- Divider -->
-        <div class="ornament-line mb-6 opacity-40">
-          <i class="fa-solid fa-heart text-[8px] text-gold"></i>
-        </div>
-
-        <button
-          onclick="openPinModal()"
-          class="w-full py-3 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-300"
-          style="
-            background: linear-gradient(
-              135deg,
-              rgba(139, 0, 0, 0.7),
-              rgba(107, 0, 0, 0.5)
-            );
-            border: 1px solid rgba(201, 163, 95, 0.5);
-            color: rgba(253, 246, 231, 0.95);
-            box-shadow: 0 4px 16px rgba(139, 0, 0, 0.3);
-          "
-        >
-          <i class="fa-solid fa-envelope-open-text mr-2 text-gold/80"></i>
-          Unlock Letter
+        <h1 class="shimmer-text font-handwriting text-4xl sm:text-5xl mb-1 leading-tight">Happy Anniversary</h1>
+        <p class="text-white/50 text-xs tracking-[0.3em] uppercase mb-6">July 15, 2026</p>
+        <div class="ornament-line mb-6 opacity-40"><i class="fa-solid fa-heart text-[8px] text-gold"></i></div>
+        <button onclick="openPinModal()" class="w-full py-3 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-300" style="background:linear-gradient(135deg,rgba(139,0,0,0.7),rgba(107,0,0,0.5));border:1px solid rgba(201,163,95,0.5);color:rgba(253,246,231,0.95);box-shadow:0 4px 16px rgba(139,0,0,0.3);">
+          <i class="fa-solid fa-envelope-open-text mr-2 text-gold/80"></i>Unlock Letter
         </button>
       </div>
-
-      <!-- Bottom: date badge + small note -->
-      <div
-        class="absolute bottom-6 sm:bottom-8 left-0 right-0 flex flex-col items-center gap-2 pointer-events-none"
-        style="animation: fadeInUp 1.4s ease 0.6s both"
-      ></div>
+      <div class="absolute bottom-6 sm:bottom-8 left-0 right-0 flex flex-col items-center gap-2 pointer-events-none" style="animation:fadeInUp 1.4s ease 0.6s both"></div>
     </div>
 
     <!-- ============ PIN MODAL ============ -->
-    <div
-      id="pin-modal"
-      class="fixed inset-0 hidden items-center justify-center bg-black/60 p-4 z-50"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="pin-modal-title"
-    >
-      <div
-        id="pin-modal-inner"
-        class="w-full max-w-md rounded-3xl p-8 shadow-2xl"
-      >
-        <h2 id="pin-modal-title" class="text-2xl font-semibold mb-2 text-white">
-          Enter PIN
-        </h2>
-        <p class="text-sm mb-6 text-white/75">
-          Enter the 6-digit code to unlock the letter.
-        </p>
-        <input
-          id="pin-input"
-          type="text"
-          inputmode="numeric"
-          pattern="[0-9]*"
-          maxlength="6"
-          autocomplete="one-time-code"
-          aria-describedby="pin-error"
-          class="w-full rounded-2xl p-4 text-xl font-semibold outline-none tracking-[0.3em] text-center"
-          placeholder="••••••"
-        />
-        <p
-          id="pin-error"
-          class="mt-3 text-sm text-pink-200 hidden"
-          role="alert"
-        >
-          Incorrect PIN. Try again.
-        </p>
+    <div id="pin-modal" class="fixed inset-0 hidden items-center justify-center bg-black/60 p-4 z-50" role="dialog" aria-modal="true" aria-labelledby="pin-modal-title">
+      <div id="pin-modal-inner" class="w-full max-w-md rounded-3xl p-8 shadow-2xl">
+        <h2 id="pin-modal-title" class="text-2xl font-semibold mb-2 text-white">Enter PIN</h2>
+        <p class="text-sm mb-6 text-white/75">Enter the 6-digit code to unlock the letter.</p>
+        <input id="pin-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" aria-describedby="pin-error" class="w-full rounded-2xl p-4 text-xl font-semibold outline-none tracking-[0.3em] text-center" placeholder="••••••" />
+        <p id="pin-error" class="mt-3 text-sm text-pink-200 hidden" role="alert">Incorrect PIN. Try again.</p>
         <div class="mt-6 flex items-center justify-end gap-3">
-          <button
-            onclick="closePinModal()"
-            class="pin-btn-cancel rounded-full px-4 py-2 text-sm uppercase tracking-widest"
-          >
-            Cancel
-          </button>
-          <button
-            onclick="submitPin()"
-            class="pin-btn-submit rounded-full px-4 py-2 text-sm uppercase tracking-widest font-semibold"
-          >
-            Submit
-          </button>
+          <button onclick="closePinModal()" class="pin-btn-cancel rounded-full px-4 py-2 text-sm uppercase tracking-widest">Cancel</button>
+          <button onclick="submitPin()" class="pin-btn-submit rounded-full px-4 py-2 text-sm uppercase tracking-widest font-semibold">Submit</button>
         </div>
       </div>
+    </div>
+
+    <!-- ============ VERTICAL PHOTO STRIPS (letter side panels) ============ -->
+    <div id="strip-left" class="photo-strip-wrap left" aria-hidden="true">
+      <div id="strip-left-inner" class="photo-strip"></div>
+    </div>
+    <div id="strip-right" class="photo-strip-wrap right" aria-hidden="true">
+      <div id="strip-right-inner" class="photo-strip"></div>
     </div>
 
     <!-- ============ LETTER CONTENT ============ -->
-    <div
-      id="letter-content"
-      class="opacity-0 hidden max-w-3xl mx-auto py-12 px-4 sm:px-8 relative z-10 transition-opacity duration-1000"
-    >
-      <div class="letter-container p-8 sm:p-16 relative rounded-sm">
-        <button
-          onclick="returnToLockScreen()"
-          class="absolute right-6 top-6 sm:right-8 sm:top-8 rounded-full border border-ink/70 bg-parchment/90 px-4 py-2 text-xs sm:text-sm font-semibold uppercase tracking-wide text-ink transition hover:bg-ink hover:text-parchment"
-        >
-          <i class="fa-solid fa-arrow-left mr-1" aria-hidden="true"></i> Back
-        </button>
-        <div class="text-center mb-16">
-          <p class="font-handwriting text-2xl sm:text-3xl text-gold mb-2">
-            CJay &amp; Ayen
-          </p>
-          <h1 class="font-handwriting text-5xl sm:text-6xl text-wax mb-4">
-            Happy Anniversary
-          </h1>
-          <p class="text-lg italic text-ink-soft">
-            The journey of our first 12 months&hellip;
-          </p>
-          <div class="w-16 h-[2px] bg-gold/70 mx-auto mt-6"></div>
+    <div id="letter-content" class="opacity-0 hidden max-w-3xl mx-auto py-16 px-4 sm:px-8 relative z-10 transition-opacity duration-1000">
+
+      <!-- Outer decorative wrapper -->
+      <div class="letter-container rounded-sm p-3 sm:p-4" style="box-shadow:0 14px 50px rgba(62,42,30,0.22),0 1px 0 rgba(255,255,255,0.5) inset;">
+
+        <!-- Wax ribbon tab at top -->
+        <div class="wax-ribbon font-handwriting text-base tracking-widest" style="letter-spacing:0.2em;">
+          <i class="fa-solid fa-heart mr-2 opacity-70" aria-hidden="true"></i>One Year<i class="fa-solid fa-heart ml-2 opacity-70" aria-hidden="true"></i>
         </div>
-        <div class="relative p-2 sm:p-6">
-          <div id="timeline-wrapper" class="w-full relative"></div>
-        </div>
-        <div class="mt-16 text-center">
-          <div class="w-16 h-[1px] bg-ink/40 mx-auto mb-6"></div>
-          <p class="font-handwriting text-3xl mt-4">With all my love,</p>
-          <p class="font-handwriting text-2xl mt-2 text-wax">CJay</p>
-        </div>
-      </div>
-    </div>
+
+        <!-- Corner SVG flourishes -->
+        <svg class="corner-flourish tl" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M10 80 Q10 10 80 10" stroke="#8b0000" stroke-width="1" fill="none"/>
+          <path d="M5 80 Q5 5 80 5" stroke="#c9a35f" stroke-width="0.6" fill="none"/>
+          <path d="M18 80 Q18 18 80 18" stroke="#8b0000" stroke-width="0.5" fill="none"/>
+          <circle cx="10" cy="10" r="3" fill="#c9a35f"/>
+          <circle cx="10" cy="10" r="1.5" fill="#8b0000"/>
+          <path d="M10 20 L10 14 M20 10 L14 10" stroke="#c9a35f" stroke-width="0.8"/>
+          <path d="M5 30 Q8 20 18 5" stroke="#c9a35f" stroke-width="0.5" fill="none" stroke-dasharray="2 3"/>
+        </svg>
+        <svg class="corner-flourish tr" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M10 80 Q10 10 80 10" stroke="#8b0000" stroke-width="1" fill="none"/>
+          <path d="M5 80 Q5 5 80 5" stroke="#c9a35f" stroke-width="0.6" fill="none"/>
+          <path d="M18 80 Q18 18 80 18" stroke="#8b0000" stroke-width="0.5" fill="none"/>
+          <circle cx="10" cy="10" r="3" fill="#c9a35f"/>
+          <circle cx="10" cy="10" r="1.5" fill="#8b0000"/>
+          <path d="M10 20 L10 14 M20 10 L14 10" stroke="#c9a35f" stroke-width="0.8"/>
+          <path d="M5 30 Q8 20 18 5" stroke="#c9a35f" stroke-width="0.5" fill="none" stroke-dasharray="2 3"/>
+        </svg>
+        <svg class="corner-flourish bl" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M10 80 Q10 10 80 10" stroke="#8b0000" stroke-width="1" fill="none"/>
+          <path d="M5 80 Q5 5 80 5" stroke="#c9a35f" stroke-width="0.6" fill="none"/>
+          <path d="M18 80 Q18 18 80 18" stroke="#8b0000" stroke-width="0.5" fill="none"/>
+          <circle cx="10" cy="10" r="3" fill="#c9a35f"/>
+          <circle cx="10" cy="10" r="1.5" fill="#8b0000"/>
+          <path d="M10 20 L10 14 M20 10 L14 10" stroke="#c9a35f" stroke-width="0.8"/>
+          <path d="M5 30 Q8 20 18 5" stroke="#c9a35f" stroke-width="0.5" fill="none" stroke-dasharray="2 3"/>
+        </svg>
+        <svg class="corner-flourish br" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M10 80 Q10 10 80 10" stroke="#8b0000" stroke-width="1" fill="none"/>
+          <path d="M5 80 Q5 5 80 5" stroke="#c9a35f" stroke-width="0.6" fill="none"/>
+          <path d="M18 80 Q18 18 80 18" stroke="#8b0000" stroke-width="0.5" fill="none"/>
+          <circle cx="10" cy="10" r="3" fill="#c9a35f"/>
+          <circle cx="10" cy="10" r="1.5" fill="#8b0000"/>
+          <path d="M10 20 L10 14 M20 10 L14 10" stroke="#c9a35f" stroke-width="0.8"/>
+          <path d="M5 30 Q8 20 18 5" stroke="#c9a35f" stroke-width="0.5" fill="none" stroke-dasharray="2 3"/>
+        </svg>
+
+        <!-- Double-line inner border -->
+        <div class="letter-inner mt-6 mb-2">
+          <div class="letter-inner-2 p-6 sm:p-12">
+
+            <!-- Back button -->
+            <button onclick="returnToLockScreen()" class="absolute right-8 top-8 sm:right-10 sm:top-10 rounded-full border border-ink/50 bg-parchment/95 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-ink transition hover:bg-ink hover:text-parchment z-10">
+              <i class="fa-solid fa-arrow-left mr-1" aria-hidden="true"></i> Back
+            </button>
+
+            <!-- ===== LETTER HEADER ===== -->
+            <div class="text-center mb-12 pt-4">
+              <!-- Decorative top flourish -->
+              <div class="flex items-center justify-center gap-3 mb-5 opacity-60">
+                <span style="font-size:0.55rem; letter-spacing:0.4em; text-transform:uppercase; color:#8b0000; font-family:'Lora',serif;">✦ &nbsp; A Love Letter &nbsp; ✦</span>
+              </div>
+
+              <p class="font-handwriting text-3xl sm:text-4xl text-gold/90 mb-1 tracking-wide">CJay &amp; Ayen</p>
+
+              <!-- Ornamental line with heart -->
+              <div class="ornament-hr my-3">
+                <i class="fa-solid fa-heart text-wax text-[10px]" aria-hidden="true"></i>
+              </div>
+
+              <h1 class="font-display text-5xl sm:text-6xl italic text-wax mb-2 leading-tight">Happy Anniversary</h1>
+              <p class="text-sm italic text-ink-soft tracking-widest mb-1" style="font-family:'Lora',serif;">July 15, 2025 → July 15, 2026</p>
+              <p class="text-xs text-ink/40 tracking-[0.3em] uppercase">Twelve Months of Us</p>
+
+              <!-- Gold rule -->
+              <div class="flex items-center justify-center mt-5 gap-3 opacity-70">
+                <div style="width:40px;height:1px;background:linear-gradient(90deg,transparent,#c9a35f);"></div>
+                <i class="fa-solid fa-star text-gold text-[8px]" aria-hidden="true"></i>
+                <div style="width:60px;height:1px;background:#c9a35f;"></div>
+                <i class="fa-solid fa-heart text-wax text-[9px]" aria-hidden="true"></i>
+                <div style="width:60px;height:1px;background:#c9a35f;"></div>
+                <i class="fa-solid fa-star text-gold text-[8px]" aria-hidden="true"></i>
+                <div style="width:40px;height:1px;background:linear-gradient(90deg,#c9a35f,transparent);"></div>
+              </div>
+            </div>
+
+            <!-- ===== OPENING PROSE ===== -->
+            <div class="mb-10 px-0 sm:px-2">
+              <p class="drop-cap text-base leading-relaxed text-ink-soft italic" style="font-family:'Lora',serif;">
+                o my Ayen — a year ago you stepped into my world and rearranged everything quietly, without fanfare, the way morning light rearranges a room. I never asked for that kind of softness, but I am endlessly grateful it found me. These twelve months have been the truest adventure of my life.
+              </p>
+            </div>
+
+
+            <!-- Pull quote -->
+            <div class="pull-quote mx-2 sm:mx-6 mb-10 px-8 py-6 rounded-sm" style="border-radius:2px;">
+              <p class="font-display text-lg sm:text-xl italic text-wax-deep text-center leading-relaxed">
+                &ldquo;Every month with you has been a chapter I will read again and again.&rdquo;
+              </p>
+            </div>
+
+            <!-- ===== TIMELINE SECTION HEADER ===== -->
+            <div class="section-band">
+              <div class="ornament-hr mb-4">
+                <i class="fa-solid fa-book-open text-gold/60 text-[10px]" aria-hidden="true"></i>
+              </div>
+              <p class="text-xs tracking-[0.35em] uppercase text-ink/40 mb-1">Our Story, Month by Month</p>
+              <h2 class="font-display italic text-2xl sm:text-3xl text-wax">The Journey</h2>
+            </div>
+
+            <!-- ===== TIMELINE ===== -->
+            <div class="relative p-1 sm:p-2 mt-10">
+              <div id="timeline-wrapper" class="w-full relative"></div>
+            </div>
+
+            <!-- ===== CLOSING ===== -->
+            <div class="mt-14 text-center">
+              <!-- Ornamental divider -->
+              <div class="flex items-center justify-center gap-3 opacity-60 mb-8">
+                <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(62,42,30,0.3));"></div>
+                <i class="fa-solid fa-feather-pointed text-gold text-sm" aria-hidden="true"></i>
+                <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(62,42,30,0.3),transparent);"></div>
+              </div>
+
+              <!-- Closing prose -->
+              <p class="text-sm italic text-ink-soft leading-relaxed mb-6 mx-2 sm:mx-8" style="font-family:'Lora',serif;">
+                Thank you for every laugh, every quiet evening, every moment of patience and grace. Here is to the next chapter — and the one after that, and all the ones we haven't written yet.
+              </p>
+
+              <!-- Signature block -->
+              <div class="inline-block text-center">
+                <p class="font-handwriting text-2xl sm:text-3xl text-ink-soft mb-1">With all my love,</p>
+                <div class="sig-line"></div>
+                <p class="font-handwriting text-3xl sm:text-4xl text-wax mt-1">CJay</p>
+                <p class="text-xs tracking-widest text-ink/40 uppercase mt-2" style="letter-spacing:0.28em;">July 15, 2026</p>
+              </div>
+
+              <!-- Bottom ornament -->
+              <div class="flex items-center justify-center gap-2 mt-8 opacity-40">
+                <span style="font-size:0.5rem;letter-spacing:0.5em;text-transform:uppercase;color:#8b0000;">✦ &nbsp; Always &nbsp; ✦</span>
+              </div>
+            </div>
+
+          </div><!-- /letter-inner-2 -->
+        </div><!-- /letter-inner -->
+      </div><!-- /letter-container -->
+    </div><!-- /letter-content -->
 
     <!-- ============ MONTH MODAL ============ -->
-    <div
-      id="month-modal"
-      class="fixed inset-0 hidden items-center justify-center bg-black/40 p-4 z-50"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modal-title"
-    >
-      <div
-        class="relative w-full max-w-4xl rounded-3xl bg-parchment p-6 sm:p-10 shadow-2xl border border-ink/30"
-      >
-        <button
-          onclick="closeMonthModal()"
-          aria-label="Close"
-          class="absolute right-4 top-4 text-ink/70 hover:text-wax transition-colors"
-        >
+    <div id="month-modal" class="fixed inset-0 hidden items-center justify-center bg-black/40 p-4 z-50" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="relative w-full max-w-4xl rounded-3xl bg-parchment p-6 sm:p-10 shadow-2xl border border-ink/20" style="background-image:repeating-linear-gradient(0deg,rgba(62,42,30,0.018) 0px,rgba(62,42,30,0.018) 1px,transparent 1px,transparent 32px);">
+        <!-- Corner accents on modal -->
+        <div class="absolute top-4 left-4 w-8 h-8 pointer-events-none opacity-30" style="border-top:1px solid #c9a35f;border-left:1px solid #c9a35f;"></div>
+        <div class="absolute top-4 right-10 w-8 h-8 pointer-events-none opacity-30" style="border-top:1px solid #c9a35f;border-right:1px solid #c9a35f;"></div>
+        <div class="absolute bottom-4 left-4 w-8 h-8 pointer-events-none opacity-30" style="border-bottom:1px solid #c9a35f;border-left:1px solid #c9a35f;"></div>
+        <div class="absolute bottom-4 right-10 w-8 h-8 pointer-events-none opacity-30" style="border-bottom:1px solid #c9a35f;border-right:1px solid #c9a35f;"></div>
+        <button onclick="closeMonthModal()" aria-label="Close" class="absolute right-4 top-4 text-ink/60 hover:text-wax transition-colors">
           <i class="fa-solid fa-xmark fa-lg" aria-hidden="true"></i>
         </button>
-        <h3
-          id="modal-month"
-          class="text-wax text-sm uppercase tracking-widest mb-2 font-semibold"
-        ></h3>
-        <h2 id="modal-title" class="text-3xl font-bold mb-4"></h2>
-        <p
-          id="modal-text"
-          class="text-base italic leading-relaxed text-ink-soft"
-        ></p>
-        <div class="mt-8 text-right">
-          <button
-            onclick="closeMonthModal()"
-            class="inline-flex rounded-full border border-ink px-5 py-2 text-sm font-semibold uppercase tracking-wide text-ink transition hover:bg-ink hover:text-parchment"
-          >
+        <div class="text-center mb-5">
+          <div class="ornament-hr mb-3"><i class="fa-solid fa-star text-gold/60 text-[8px]" aria-hidden="true"></i></div>
+          <span id="modal-month" class="month-pill"></span>
+        </div>
+        <h2 id="modal-title" class="font-display text-2xl sm:text-3xl italic text-wax text-center mb-4"></h2>
+        <div class="ornament-hr mb-5"><i class="fa-solid fa-heart text-wax/40 text-[8px]" aria-hidden="true"></i></div>
+        <p id="modal-text" class="text-base italic leading-relaxed text-ink-soft text-center px-2 sm:px-8"></p>
+        <div class="mt-8 text-center">
+          <button onclick="closeMonthModal()" class="inline-flex rounded-full border border-ink/50 px-6 py-2 text-sm font-semibold uppercase tracking-wide text-ink transition hover:bg-ink hover:text-parchment">
             Close
           </button>
         </div>
@@ -736,13 +684,7 @@
       // =========================================================
       function createParticles() {
         const container = document.getElementById("particles-container");
-        const colors = [
-          "rgba(201,163,95,0.6)",
-          "rgba(255,255,255,0.5)",
-          "rgba(194,65,143,0.5)",
-          "rgba(232,138,168,0.5)",
-          "rgba(107,0,0,0.5)",
-        ];
+        const colors = ["rgba(201,163,95,0.6)","rgba(255,255,255,0.5)","rgba(194,65,143,0.5)","rgba(232,138,168,0.5)","rgba(107,0,0,0.5)"];
         for (let i = 0; i < 28; i++) {
           const p = document.createElement("div");
           p.className = "particle";
@@ -752,31 +694,22 @@
           const duration = Math.random() * 10 + 8;
           const drift = (Math.random() - 0.5) * 120;
           const color = colors[Math.floor(Math.random() * colors.length)];
-          p.style.cssText = `
-            width:${size}px; height:${size}px;
-            left:${left}%; bottom:-10px;
-            background:${color};
-            --drift:${drift}px;
-            animation-delay:${delay}s;
-            animation-duration:${duration}s;
-          `;
+          p.style.cssText = `width:${size}px;height:${size}px;left:${left}%;bottom:-10px;background:${color};--drift:${drift}px;animation-delay:${delay}s;animation-duration:${duration}s;`;
           container.appendChild(p);
         }
       }
-
       function createStars() {
         const container = document.getElementById("stars-container");
-        const icons = ["✦", "✧", "·", "⋆", "✶"];
+        const icons = ["✦","✧","·","⋆","✶"];
         for (let i = 0; i < 35; i++) {
           const s = document.createElement("div");
           s.className = "star-particle";
           const left = Math.random() * 100;
-          const top = Math.random() * 100;
+          const top  = Math.random() * 100;
           const delay = Math.random() * 5;
           const duration = Math.random() * 3 + 2;
-          const icon = icons[Math.floor(Math.random() * icons.length)];
-          s.style.cssText = `left:${left}%; top:${top}%; animation-delay:${delay}s; animation-duration:${duration}s; font-size:${Math.random() * 8 + 6}px;`;
-          s.textContent = icon;
+          s.style.cssText = `left:${left}%;top:${top}%;animation-delay:${delay}s;animation-duration:${duration}s;font-size:${Math.random()*8+6}px;`;
+          s.textContent = icons[Math.floor(Math.random() * icons.length)];
           container.appendChild(s);
         }
       }
@@ -785,295 +718,290 @@
       // Timeline data
       // =========================================================
       const timelineData = [
-        {
-          month: "Month 1",
-          title: "August 15, 2025",
-          text: "Where it all started. The first time we really connected.",
-        },
-        {
-          month: "Month 2",
-          title: "September 15, 2025",
-          text: "Late night conversations and learning about each other.",
-        },
-        {
-          month: "Month 3",
-          title: "October 15, 2025",
-          text: "Our first trip or memorable date together.",
-        },
-        {
-          month: "Month 4",
-          title: "November 15, 2025",
-          text: "The moments that made me realize how special this is.",
-        },
-        {
-          month: "Month 5",
-          title: "December 15, 2025",
-          text: "Feeling entirely at home in your presence.",
-        },
-        {
-          month: "Month 6",
-          title: "January 15, 2026",
-          text: "Six months of laughter, growth, and building trust.",
-        },
-        {
-          month: "Month 7",
-          title: "February 15, 2026",
-          text: "A challenge we faced and overcame together.",
-        },
-        {
-          month: "Month 8",
-          title: "March 15, 2026",
-          text: "Appreciating the simple days spent doing nothing.",
-        },
-        {
-          month: "Month 9",
-          title: "April 15, 2026",
-          text: "Finding new favorite places and shared hobbies.",
-        },
-        {
-          month: "Month 10",
-          title: "May 15, 2026",
-          text: "Starting to plan our future and dreaming together.",
-        },
-        {
-          month: "Month 11",
-          title: "June 15, 2026",
-          text: "Knowing each other's flaws and loving them anyway.",
-        },
-        {
-          month: "Month 12",
-          title: "July 15, 2026",
-          text: "365 days of us. Here is to a lifetime more.",
-        },
+        { month:"Month 1",  title:"August 15, 2025",   text:"Where it all started. The first time we really connected." },
+        { month:"Month 2",  title:"September 15, 2025", text:"Late night conversations and learning about each other." },
+        { month:"Month 3",  title:"October 15, 2025",   text:"Our first trip or memorable date together." },
+        { month:"Month 4",  title:"November 15, 2025",  text:"The moments that made me realize how special this is." },
+        { month:"Month 5",  title:"December 15, 2025",  text:"Feeling entirely at home in your presence." },
+        { month:"Month 6",  title:"January 15, 2026",   text:"Six months of laughter, growth, and building trust." },
+        { month:"Month 7",  title:"February 15, 2026",  text:"A challenge we faced and overcame together." },
+        { month:"Month 8",  title:"March 15, 2026",     text:"Appreciating the simple days spent doing nothing." },
+        { month:"Month 9",  title:"April 15, 2026",     text:"Finding new favorite places and shared hobbies." },
+        { month:"Month 10", title:"May 15, 2026",       text:"Starting to plan our future and dreaming together." },
+        { month:"Month 11", title:"June 15, 2026",      text:"Knowing each other's flaws and loving them anyway." },
+        { month:"Month 12", title:"July 15, 2026",      text:"365 days of us. Here is to a lifetime more." },
       ];
 
       function escapeHtml(str) {
-        const div = document.createElement("div");
-        div.textContent = str;
-        return div.innerHTML;
+        const d = document.createElement("div");
+        d.textContent = str;
+        return d.innerHTML;
       }
 
       function renderTimeline() {
         const wrapper = document.getElementById("timeline-wrapper");
-        let html = "";
         const lastIndex = timelineData.length - 1;
+        let html = "";
         timelineData.forEach((item, index) => {
           const isFinal = index === lastIndex;
-          const markerSize = "w-9 h-9 sm:w-11 sm:h-11 text-sm sm:text-base";
-          const markerColors = isFinal
-            ? "bg-wax-deep shadow-lg ring-4 ring-gold/50"
-            : "bg-wax shadow-md";
-          const card = isFinal
-            ? "bg-gradient-to-br from-[#fdf8f0] to-[#fbeecb] shadow-lg hover:shadow-xl ring-2 ring-gold border-gold/60"
-            : "bg-[#fffdf7] shadow-md hover:shadow-lg border-ink/25";
-          const monthLabel = isFinal
-            ? `<h3 class="mb-1 font-semibold text-wax-deep text-xs sm:text-sm uppercase tracking-wider">${escapeHtml(item.month)} &middot; Our Anniversary</h3>`
-            : `<h3 class="mb-1 font-semibold text-wax text-xs sm:text-sm uppercase tracking-wider">${escapeHtml(item.month)}</h3>`;
-          const button = isFinal
-            ? `<button onclick="openMonthModal(${index})" class="self-start sm:self-center shrink-0 inline-flex items-center justify-center rounded-full bg-wax-deep border border-wax-deep px-4 py-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-parchment whitespace-nowrap transition hover:bg-wax hover:border-wax" aria-label="View letter for ${escapeHtml(item.month)}"><i class="fa-solid fa-heart mr-1.5" aria-hidden="true"></i> View Letter</button>`
-            : `<button onclick="openMonthModal(${index})" class="self-start sm:self-center shrink-0 inline-flex items-center justify-center rounded-full border border-ink/60 px-3 py-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-ink whitespace-nowrap transition hover:bg-ink hover:text-parchment" aria-label="View letter for ${escapeHtml(item.month)}">View Letter</button>`;
+          const markerClass = isFinal ? "tl-marker final" : "tl-marker";
+          const cardClass   = isFinal ? "tl-card-body final-card" : "tl-card-body";
+          const pillClass   = isFinal ? "month-pill final" : "month-pill";
+          const markerContent = isFinal
+            ? `<i class="fa-solid fa-star" aria-hidden="true"></i>`
+            : (index + 1);
+
+          const btnContent = isFinal
+            ? `<button onclick="openMonthModal(${index})" class="shrink-0 self-start sm:self-center inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-parchment transition whitespace-nowrap" style="background:linear-gradient(135deg,#8b0000,#c9a35f);border:none;box-shadow:0 2px 8px rgba(201,163,95,0.3);" aria-label="View letter for ${escapeHtml(item.month)}"><i class="fa-solid fa-heart" aria-hidden="true"></i> View Letter</button>`
+            : `<button onclick="openMonthModal(${index})" class="shrink-0 self-start sm:self-center inline-flex items-center gap-1.5 rounded-full border border-ink/40 px-3 py-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-ink whitespace-nowrap transition hover:bg-ink hover:text-parchment" aria-label="View letter for ${escapeHtml(item.month)}"><i class="fa-solid fa-envelope" aria-hidden="true"></i> View</button>`;
+
           html += `
-            <div class="relative ${isFinal ? "mb-2" : "mb-7"} flex items-center gap-3 sm:gap-4 timeline-card" data-index="${index}">
-              <div class="relative shrink-0 z-20 flex items-center justify-center ${markerSize} ${markerColors} rounded-full border-2 border-parchment text-parchment font-semibold timeline-marker">
-                ${isFinal ? `<i class="fa-solid fa-star" aria-hidden="true"></i>` : index + 1}
-              </div>
-              <div class="${card} transition-shadow w-full px-4 py-4 sm:px-6 sm:py-5 ${isFinal ? "border" : "border-2"} rounded-lg">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-6">
-                  <div class="min-w-0">${monthLabel}<h4 class="font-bold text-base sm:text-lg leading-snug ${isFinal ? "text-wax-deep" : ""}">${escapeHtml(item.title)}</h4></div>
-                  ${button}
+            <div class="relative ${isFinal ? "mb-2" : "mb-6"} flex items-center gap-3 sm:gap-4 timeline-card" data-index="${index}">
+              <div class="${markerClass}">${markerContent}</div>
+              <div class="${cardClass} w-full px-4 py-3 sm:px-5 sm:py-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4">
+                  <div class="min-w-0">
+                    <span class="${pillClass} mb-1">${escapeHtml(item.month)}${isFinal ? " · Anniversary" : ""}</span>
+                    <h4 class="font-semibold text-sm sm:text-base leading-snug mt-1 ${isFinal ? "text-wax-deep" : "text-ink"}" style="font-family:'Lora',serif;">${escapeHtml(item.title)}</h4>
+                  </div>
+                  ${btnContent}
                 </div>
               </div>
             </div>`;
         });
         wrapper.innerHTML = html;
         requestAnimationFrame(() => requestAnimationFrame(drawConnectors));
+
         const cards = wrapper.querySelectorAll(".timeline-card");
-        const prefersReducedMotion = window.matchMedia(
-          "(prefers-reduced-motion: reduce)",
-        ).matches;
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         if (prefersReducedMotion || !("IntersectionObserver" in window)) {
-          cards.forEach((c) => c.classList.add("is-visible"));
+          cards.forEach(c => c.classList.add("is-visible"));
           return;
         }
         const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("is-visible");
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+          entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("is-visible"); observer.unobserve(entry.target); } }),
+          { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
         );
-        cards.forEach((c) => observer.observe(c));
+        cards.forEach(c => observer.observe(c));
       }
 
       function drawConnectors() {
         const wrapper = document.getElementById("timeline-wrapper");
-        wrapper
-          .querySelectorAll(".timeline-connector")
-          .forEach((el) => el.remove());
-        const markers = Array.from(
-          wrapper.querySelectorAll(".timeline-marker"),
-        );
+        wrapper.querySelectorAll(".timeline-connector").forEach(el => el.remove());
+        const markers = Array.from(wrapper.querySelectorAll(".tl-marker"));
         for (let i = 0; i < markers.length - 1; i++) {
-          const current = markers[i];
+          const cur  = markers[i];
           const next = markers[i + 1];
-          const row = current.parentElement;
+          const row     = cur.parentElement;
           const nextRow = next.parentElement;
-          const centerX = current.offsetLeft + current.offsetWidth / 2;
-          const startY =
-            row.offsetTop + current.offsetTop + current.offsetHeight;
-          const endY = nextRow.offsetTop + next.offsetTop;
+          const cx     = cur.offsetLeft  + cur.offsetWidth  / 2;
+          const startY = row.offsetTop   + cur.offsetTop    + cur.offsetHeight;
+          const endY   = nextRow.offsetTop + next.offsetTop;
           const height = Math.max(endY - startY, 0);
-          const connector = document.createElement("div");
-          connector.className = "timeline-connector";
-          connector.setAttribute("aria-hidden", "true");
-          connector.style.cssText = `position:absolute; left:${centerX}px; top:${startY}px; width:3px; height:${height}px; margin-left:-1.5px; background:linear-gradient(180deg,#8b0000,#c9a35f); border-radius:2px; z-index:1;`;
-          wrapper.appendChild(connector);
+          const conn = document.createElement("div");
+          conn.className = "timeline-connector";
+          conn.setAttribute("aria-hidden", "true");
+          conn.style.cssText = `position:absolute;left:${cx}px;top:${startY}px;width:2px;height:${height}px;margin-left:-1px;background:linear-gradient(180deg,rgba(139,0,0,0.4),rgba(201,163,95,0.5));border-radius:2px;z-index:1;`;
+          wrapper.appendChild(conn);
         }
       }
-
-      window.addEventListener("resize", () => {
-        clearTimeout(window._connectorResizeTimer);
-        window._connectorResizeTimer = setTimeout(drawConnectors, 150);
-      });
+      window.addEventListener("resize", () => { clearTimeout(window._crt); window._crt = setTimeout(drawConnectors, 150); });
 
       // =========================================================
       // Month modal
       // =========================================================
-      let lastFocusedBeforeMonthModal = null;
+      let lastFocused = null;
       function openMonthModal(index) {
         const item = timelineData[index];
-        document.getElementById("modal-month").textContent = item.month;
+        const pill = document.getElementById("modal-month");
+        pill.textContent = item.month + (index === timelineData.length - 1 ? " · Anniversary" : "");
+        pill.className = "month-pill" + (index === timelineData.length - 1 ? " final" : "");
         document.getElementById("modal-title").textContent = item.title;
         document.getElementById("modal-text").textContent = item.text;
-        lastFocusedBeforeMonthModal = document.activeElement;
-        const modal = document.getElementById("month-modal");
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");
+        lastFocused = document.activeElement;
+        const m = document.getElementById("month-modal");
+        m.classList.remove("hidden"); m.classList.add("flex");
         document.body.classList.add("overflow-hidden");
-        modal.querySelector("button[aria-label='Close']").focus();
+        m.querySelector("button[aria-label='Close']").focus();
       }
       function closeMonthModal() {
-        const modal = document.getElementById("month-modal");
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
+        const m = document.getElementById("month-modal");
+        m.classList.add("hidden"); m.classList.remove("flex");
         document.body.classList.remove("overflow-hidden");
-        if (lastFocusedBeforeMonthModal) lastFocusedBeforeMonthModal.focus();
+        if (lastFocused) lastFocused.focus();
       }
-      document.getElementById("month-modal").addEventListener("click", (e) => {
-        if (e.target.id === "month-modal") closeMonthModal();
-      });
+      document.getElementById("month-modal").addEventListener("click", e => { if (e.target.id === "month-modal") closeMonthModal(); });
 
       // =========================================================
       // PIN
       // =========================================================
       function simpleHash(str) {
-        let hash = 0;
-        for (let i = 0; i < str.length; i++) {
-          hash = (hash << 5) - hash + str.charCodeAt(i);
-          hash |= 0;
-        }
-        return hash.toString(16);
+        let h = 0;
+        for (let i = 0; i < str.length; i++) { h = (h << 5) - h + str.charCodeAt(i); h |= 0; }
+        return h.toString(16);
       }
       const PIN_HASH = "5506bdee"; // simpleHash("071525")
 
       function openPinModal() {
-        const modal = document.getElementById("pin-modal");
+        const m = document.getElementById("pin-modal");
         document.getElementById("pin-input").value = "";
         document.getElementById("pin-error").classList.add("hidden");
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");
+        m.classList.remove("hidden"); m.classList.add("flex");
         setTimeout(() => document.getElementById("pin-input").focus(), 100);
       }
       function closePinModal() {
-        const modal = document.getElementById("pin-modal");
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
+        const m = document.getElementById("pin-modal");
+        m.classList.add("hidden"); m.classList.remove("flex");
       }
-      document.getElementById("pin-modal").addEventListener("click", (e) => {
-        if (e.target.id === "pin-modal") closePinModal();
-      });
+      document.getElementById("pin-modal").addEventListener("click", e => { if (e.target.id === "pin-modal") closePinModal(); });
       function submitPin() {
-        const input = document.getElementById("pin-input");
-        const error = document.getElementById("pin-error");
+        const input   = document.getElementById("pin-input");
+        const error   = document.getElementById("pin-error");
         const cleaned = input.value.replace(/[^0-9]/g, "");
-        if (simpleHash(cleaned) === PIN_HASH) {
-          closePinModal();
-          crackSealAndUnlock();
-          return;
-        }
-        error.classList.remove("hidden");
-        input.focus();
-        input.select();
+        if (simpleHash(cleaned) === PIN_HASH) { closePinModal(); crackSealAndUnlock(); return; }
+        error.classList.remove("hidden"); input.focus(); input.select();
       }
-      document.getElementById("pin-input").addEventListener("input", (e) => {
-        e.target.value = e.target.value.replace(/[^0-9]/g, "");
-      });
-      document.getElementById("pin-input").addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-          e.preventDefault();
-          submitPin();
-        }
-      });
-      document.addEventListener("keydown", (e) => {
+      document.getElementById("pin-input").addEventListener("input", e => { e.target.value = e.target.value.replace(/[^0-9]/g, ""); });
+      document.getElementById("pin-input").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); submitPin(); } });
+      document.addEventListener("keydown", e => {
         if (e.key !== "Escape") return;
-        if (
-          !document.getElementById("month-modal").classList.contains("hidden")
-        )
-          closeMonthModal();
-        if (!document.getElementById("pin-modal").classList.contains("hidden"))
-          closePinModal();
+        if (!document.getElementById("month-modal").classList.contains("hidden")) closeMonthModal();
+        if (!document.getElementById("pin-modal").classList.contains("hidden"))   closePinModal();
       });
 
       // =========================================================
       // Unlock / lock
       // =========================================================
       function crackSealAndUnlock() {
-        const sealButton = document.getElementById("seal-button");
-        sealButton.classList.add("is-cracking");
-        sealButton.disabled = true;
+        const sb = document.getElementById("seal-button");
+        sb.classList.add("is-cracking"); sb.disabled = true;
         setTimeout(unlockLetter, 350);
       }
+      // =========================================================
+      // Vertical photo strips — left scrolls UP, right scrolls DOWN
+      // =========================================================
+      let stripAnimId = null;
+
+      function captionFor(src) {
+        if (src.includes("Bataan/2025"))  return "Bataan '25";
+        if (src.includes("Bataan/2026"))  return "Bataan '26";
+        if (src.includes("Manaoag"))      return "Manaoag '25";
+        if (src.includes("Tarlac/2025"))  return "Tarlac '25";
+        if (src.includes("Tarlac/2026"))  return "Tarlac '26";
+        if (src.includes("1st Image"))    return "The beginning";
+        return "Us ♥";
+      }
+
+      function buildStrip(containerEl, images) {
+        containerEl.innerHTML = "";
+        // Duplicate the list so we have enough to loop seamlessly
+        const tiled = [...images, ...images, ...images];
+        tiled.forEach(src => {
+          const card = document.createElement("div");
+          card.className = "strip-polaroid";
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = "";
+          img.loading = "lazy";
+          const cap = document.createElement("span");
+          cap.className = "strip-polaroid-caption";
+          cap.textContent = captionFor(src);
+          card.appendChild(img);
+          card.appendChild(cap);
+          containerEl.appendChild(card);
+        });
+      }
+
+      function startStrips() {
+        const pool = [...lockBgImages];
+        for (let i = pool.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [pool[i], pool[j]] = [pool[j], pool[i]];
+        }
+        const half      = Math.ceil(pool.length / 2);
+        const leftImgs  = pool.slice(0, half);
+        const rightImgs = pool.slice(half);
+
+        const leftInner  = document.getElementById("strip-left-inner");
+        const rightInner = document.getElementById("strip-right-inner");
+
+        buildStrip(leftInner,  leftImgs);
+        buildStrip(rightInner, rightImgs);
+
+        // polaroid height (130px img + 6px top pad + 28px bottom pad + 1px border*2) + 14px gap = ~180px per tile
+        const tileH = 180;
+        const leftCount  = leftImgs.length;   // one "set" length (strip has 3x)
+        const rightCount = rightImgs.length;
+        const leftLoop   = leftCount  * tileH; // reset when we've scrolled one full set
+        const rightLoop  = rightCount * tileH;
+
+        // Left starts at 0 (top), scrolls UP (negative translateY)
+        let leftY = 0;
+        // Right starts scrolled down one full set so it appears to start mid-strip and scrolls DOWN
+        let rightY = -rightLoop;
+
+        const speed = 0.5; // px per frame
+
+        if (stripAnimId) cancelAnimationFrame(stripAnimId);
+
+        function animate() {
+          // Left: scroll UP → subtract
+          leftY -= speed;
+          // When we've scrolled one full copy, jump back seamlessly
+          if (Math.abs(leftY) >= leftLoop) leftY = 0;
+
+          // Right: scroll DOWN → add (toward 0)
+          rightY += speed;
+          // When it reaches 0 (top of first copy), jump back down one set
+          if (rightY >= 0) rightY = -rightLoop;
+
+          leftInner.style.transform  = `translateY(${leftY}px)`;
+          rightInner.style.transform = `translateY(${rightY}px)`;
+
+          stripAnimId = requestAnimationFrame(animate);
+        }
+
+        document.getElementById("strip-left").classList.add("visible");
+        document.getElementById("strip-right").classList.add("visible");
+        stripAnimId = requestAnimationFrame(animate);
+      }
+
+      function stopStrips() {
+        if (stripAnimId) { cancelAnimationFrame(stripAnimId); stripAnimId = null; }
+        document.getElementById("strip-left").classList.remove("visible");
+        document.getElementById("strip-right").classList.remove("visible");
+      }
+
       function unlockLetter() {
-        const lockScreen = document.getElementById("lock-screen");
-        const letterContent = document.getElementById("letter-content");
+        const ls  = document.getElementById("lock-screen");
+        const lc  = document.getElementById("letter-content");
         const music = document.getElementById("bg-music");
-        music.play().catch((err) => console.log("Audio play failed:", err));
-        lockScreen.classList.remove("opacity-100");
-        lockScreen.classList.add("opacity-0", "pointer-events-none");
+        music.play().catch(() => {});
+        ls.classList.remove("opacity-100"); ls.classList.add("opacity-0","pointer-events-none");
+        startStrips();
         setTimeout(() => {
-          lockScreen.classList.add("hidden");
-          letterContent.classList.remove("hidden");
+          ls.classList.add("hidden");
+          lc.classList.remove("hidden");
           requestAnimationFrame(() => {
-            letterContent.classList.remove("opacity-0");
-            letterContent.classList.add("opacity-100");
+            lc.classList.remove("opacity-0"); lc.classList.add("opacity-100");
             requestAnimationFrame(() => requestAnimationFrame(drawConnectors));
           });
           window.scrollTo({ top: 0, behavior: "smooth" });
         }, 1000);
       }
+
       function returnToLockScreen() {
-        const lockScreen = document.getElementById("lock-screen");
-        const letterContent = document.getElementById("letter-content");
+        const ls  = document.getElementById("lock-screen");
+        const lc  = document.getElementById("letter-content");
+        const sb  = document.getElementById("seal-button");
         const music = document.getElementById("bg-music");
-        const sealButton = document.getElementById("seal-button");
-        letterContent.classList.add("opacity-0", "pointer-events-none");
-        lockScreen.classList.remove("hidden");
-        sealButton.classList.remove("is-cracking");
-        sealButton.disabled = false;
-        requestAnimationFrame(() => {
-          lockScreen.classList.remove("opacity-0", "pointer-events-none");
-          lockScreen.classList.add("opacity-100");
-        });
-        music.pause();
-        music.currentTime = 0;
-        setTimeout(() => {
-          letterContent.classList.add("hidden");
-          letterContent.classList.remove("pointer-events-none");
-        }, 1000);
+        lc.classList.add("opacity-0","pointer-events-none");
+        ls.classList.remove("hidden");
+        sb.classList.remove("is-cracking"); sb.disabled = false;
+        requestAnimationFrame(() => { ls.classList.remove("opacity-0","pointer-events-none"); ls.classList.add("opacity-100"); });
+        music.pause(); music.currentTime = 0;
+        stopStrips();
+        setTimeout(() => { lc.classList.add("hidden"); lc.classList.remove("pointer-events-none"); }, 1000);
       }
 
       // =========================================================
@@ -1196,66 +1124,33 @@
       const bg1 = document.getElementById("lock-screen-bg1");
       const bg2 = document.getElementById("lock-screen-bg2");
       const preloadedImages = new Set();
-
-      function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-      }
-      function preloadImage(src) {
-        if (preloadedImages.has(src)) return;
-        preloadedImages.add(src);
-        const img = new Image();
-        img.src = src;
-      }
+      function shuffleArray(a) { for (let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} }
+      function preloadImage(src) { if (preloadedImages.has(src)) return; preloadedImages.add(src); const img=new Image(); img.src=src; }
       function setLockBackground(index) {
-        const nextImage = lockBgImages[index];
-        if (!nextImage) return;
-        preloadImage(lockBgImages[(index + 1) % lockBgImages.length]);
-        preloadImage(lockBgImages[(index + 2) % lockBgImages.length]);
-        const purplePinkGradient =
-          "linear-gradient(135deg, #6a2c91 0%, #c2418f 50%, #e88aa8 100%)";
-        const layeredBg = `url('${nextImage}'), ${purplePinkGradient}`;
-        const layeredSize = "contain, cover";
-        const layeredRepeat = "no-repeat, no-repeat";
-        bg2.style.backgroundImage = layeredBg;
-        bg2.style.backgroundSize = layeredSize;
-        bg2.style.backgroundRepeat = layeredRepeat;
-        bg2.classList.add("opacity-100");
-        bg1.classList.remove("opacity-100");
-        setTimeout(() => {
-          bg1.style.backgroundImage = layeredBg;
-          bg1.style.backgroundSize = layeredSize;
-          bg1.style.backgroundRepeat = layeredRepeat;
-          bg1.classList.add("opacity-100");
-          bg2.classList.remove("opacity-100");
-        }, 1000);
+        const next = lockBgImages[index];
+        if (!next) return;
+        preloadImage(lockBgImages[(index+1)%lockBgImages.length]);
+        preloadImage(lockBgImages[(index+2)%lockBgImages.length]);
+        const pg = "linear-gradient(135deg,#6a2c91 0%,#c2418f 50%,#e88aa8 100%)";
+        const bg = `url('${next}'), ${pg}`;
+        const sz = "contain, cover";
+        const rp = "no-repeat, no-repeat";
+        bg2.style.backgroundImage=bg; bg2.style.backgroundSize=sz; bg2.style.backgroundRepeat=rp;
+        bg2.classList.add("opacity-100"); bg1.classList.remove("opacity-100");
+        setTimeout(()=>{ bg1.style.backgroundImage=bg; bg1.style.backgroundSize=sz; bg1.style.backgroundRepeat=rp; bg1.classList.add("opacity-100"); bg2.classList.remove("opacity-100"); }, 1000);
       }
-      function rotateLockBackground() {
-        currentLockBg = (currentLockBg + 1) % lockBgImages.length;
-        setLockBackground(currentLockBg);
-      }
+      function rotateLockBackground() { currentLockBg=(currentLockBg+1)%lockBgImages.length; setLockBackground(currentLockBg); }
       function initLockBackgrounds() {
-        if (lockBgImages.length === 0) return;
+        if (!lockBgImages.length) return;
         shuffleArray(lockBgImages);
         setLockBackground(0);
-        const prefersReducedMotion = window.matchMedia(
-          "(prefers-reduced-motion: reduce)",
-        ).matches;
-        if (!prefersReducedMotion) setInterval(rotateLockBackground, 6000);
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(rotateLockBackground, 6000);
       }
 
       document.addEventListener("DOMContentLoaded", () => {
         renderTimeline();
         initLockBackgrounds();
-        const prefersReducedMotion = window.matchMedia(
-          "(prefers-reduced-motion: reduce)",
-        ).matches;
-        if (!prefersReducedMotion) {
-          createParticles();
-          createStars();
-        }
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) { createParticles(); createStars(); }
       });
     </script>
   </body>
